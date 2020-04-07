@@ -26,7 +26,18 @@ Reports after plugging in unit to power
 
 ### Power on (screen button) / periodic checkin
 
-Got various results.
+`01 04 TT TT ?? ?? ss ss SS SS MM MM LL LL 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00`
+
+- bytes 2-3 (T) - total number of brews
+- bytes 6-7 (s) - number of 4oz brews
+- bytes 8-9 (S) - number of 6oz brews
+- bytes 10-11 (M) - number of 8oz brews
+- bytes 12-13 (L) - number of 10oz brews
+
+in my experiments: `T - s+S+M+L = 2`. So possibly the rest of data are counters too (for pitchers etc).
+There are two 01, which might be the missing cups.
+
+Investigation:
 ```
 01 04 19 4c 8e 72 00 49 01 66 0a 86 0c b5 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
 01 04 19 53 8e 76 00 5c 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
@@ -35,14 +46,17 @@ Got various results.
                ^^          ^^
 - +1 4oz cocoa
 05 04 19 57 8e 7f 00 5d 01 b8 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f
+01 04 19 58 8e 7f 00 5e 01 b8 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+01 04 19 59 8e 7f 00 5e 01 b9 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+01 04 19 5a 8e 7f 00 5e 01 b9 0a 88 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
 ^^       ^^    ^^                      ^^
 - +3 10oz strong            
       ----- total number of cups?
             ----- counter
-                  ----- counter
-                        ----- counter
-                              ----- counter
-                                    ----- number of cups strong?
+                  ----- 4 oz cups
+                        ----- 6 oz cups
+                              ----- 8 oz cups
+                                    ----- 10 oz cups
 ```
 
 - first byte possibly indicates power-on (1) or periodic check-in (5). Also type-5 messages are 1 byte shorter.
@@ -60,6 +74,7 @@ Got various results.
 ### Brew started
 
 `03 04 .. ..`
+03 04 18 60
 
 - byte 2: ..SS ....
   - bits4-5 - brew size
@@ -67,21 +82,28 @@ Got various results.
     - 01 - 6oz
     - 10 - 8oz
     - 11 - 10oz
+  - bit 3  - hot water?
 
-- byte 3: SC.. ....
+- byte 3: SCW. ....
   - bit7 (S) - strong
   - bit6 (C) - cocoa/other
+  - bit5 (W) - hot water (set with cocoa)
 
 ### Brew ended
 
 `06 04 ..`
+Hot water:
+- byte 2: 40 or 43 - prolly amount of dispenced water
 
+Program brew:
 - byte 2: 1100 XXXX
   - Last 4 bits has exact translation to cup size
   - 4 - 4oz
   - 6 - 6oz
   - 8 - 8oz
   - a - 10oz
+
+No indication of strong/cocoa
 
 ### Need more water
 
