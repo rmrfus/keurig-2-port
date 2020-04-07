@@ -12,6 +12,10 @@ RJ11 jack. Looking from the top of pins:
 - Green - UART TX. 3.3V in normal state. 9600. 8N1
 - Yellow - Ground
 
+## General protocol (speculation)
+
+`00 <size of message without first 2 bytes> <data>`
+
 ## Messages
 
 ### Got power/boot
