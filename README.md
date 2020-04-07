@@ -33,7 +33,10 @@ Got various results.
                ^^    ^^    ^^    ^^    ^^    ^^
 00 1f 01 04 19 54 8e 76 00 5d 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
                ^^          ^^
-- number of brews. +1 4oz cocoa
+- +1 4oz cocoa
+      05 04 19 57 8e 7f 00 5d 01 b8 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f
+      ^^       ^^.   ^^.                     ^^
+- +3 10oz strong            
 ```
 
 - not a serial. Last group of s/n should contain at least 3 bytes.
@@ -74,9 +77,13 @@ Got various results.
 
 ### Need more water
 
-`00 03 0d 04 03` - need more water (ran out of water after the brew)
+`00 03 0d 04 03` 
 
-`00 03 0d 04 02` - need more water (onscreen menu)
+or
+
+`00 03 0d 04 02` 
+
+last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
 
 ## Settings reporting
 
