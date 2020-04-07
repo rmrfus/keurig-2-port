@@ -2,6 +2,8 @@
 
 This is living document containing results of reverse engineering of Keurig 2.0 RJ11 service port.
 
+![Image of the process](pics/IMG_0985.jpeg)
+
 ## Wiring
 
 RJ11 jack. Looking from the top of pins:
