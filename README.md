@@ -115,11 +115,14 @@ last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
 
 ### Water filter reminder
 
-`0c 04 ..`
+Set: `0c 04 ..`
 
 - byte 2: R000 0000
   - R - water filter reminder. 1 - on
 
+Pop-up reminder:
+`0c 04 88` - not now
+- (?) bit-3 has action taken. 1 - "not now"
 
 ### Settings without any reporting
 
