@@ -24,7 +24,7 @@ Reports after plugging in unit to power
 
 `08 04 18`
 
-### Power on (screen button)
+### Power on (screen button) / periodic checkin
 
 Got various results.
 ```
@@ -38,6 +38,8 @@ Got various results.
 ^^       ^^    ^^                      ^^
 - +3 10oz strong            
 ```
+
+- first byte possibly indicates power-on (1) or periodic check-in (5). Also type-5 messages are 1 byte shorter.
 
 - not a serial. Last group of s/n should contain at least 3 bytes.
 - not a contents of settings
