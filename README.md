@@ -28,6 +28,8 @@ Reports after plugging in unit to power
 
 `01 04 TT TT ?? ?? ss ss SS SS MM MM LL LL 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00`
 
+Total statistics:
+
 - bytes 2-3 (T) - total number of brews
 - bytes 6-7 (s) - number of 4oz brews
 - bytes 8-9 (S) - number of 6oz brews
