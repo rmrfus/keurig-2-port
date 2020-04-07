@@ -26,15 +26,16 @@ Got various results.
 ```
 00 1f 01 04 19 4c 8e 72 00 49 01 66 0a 86 0c b5 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
 00 1f 01 04 19 53 8e 76 00 5c 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
-               ^^    ^^    ^^    ^^          ^^
+               ^^    ^^    ^^    ^^    ^^    ^^
 00 1f 01 04 19 54 8e 76 00 5d 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
                ^^          ^^
 - number of brews. +1 4oz cocoa
 ```
 
-- not a serial
+- not a serial. Last group of s/n should contain at least 3 bytes.
 - not a contents of settings
 - not internal clock.
+- not a number of power-ons. Hard or soft.
 
 
 ### Power off (screen button)
