@@ -14,28 +14,35 @@ RJ11 jack. Looking from the top of pins:
 
 ### Got power/boot
 
-00 03 08 04 18
+Reports after plugging in unit to power
+
+`00 03 08 04 18`
 
 ### Power on (screen button)
 
+Got various results.
+```
 00 1f 01 04 19 4c 8e 72 00 49 01 66 0a 86 0c b5 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
 00 1f 01 04 19 53 8e 76 00 5c 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
                ^^    ^^    ^^    ^^          ^^
 00 1f 01 04 19 54 8e 76 00 5d 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
                ^^          ^^
 - number of brews. +1 4oz cocoa
+```
 
-- not eeprom.
-- not internal clocks.
+- not a serial
+- not a contents of settings
+- not internal clock.
 
 
 ### Power off (screen button)
 
-00 03 02 04 00
+`00 03 02 04 00`
 
 ### Brew started
 
-00 04 03 04 .. ..
+`00 04 03 04 .. ..`
+
 - byte 4: ..SS ....
   - bits4-5 - brew size
     - 00 - 4oz
@@ -48,24 +55,28 @@ RJ11 jack. Looking from the top of pins:
   - bit6 (C) - cocoa/other
 
 ### Brew ended
-00 03 06 04 ..
+
+`00 03 06 04 ..`
+
 - byte 4: 1100 XXXX
   - Last 4 bits has exact translation to cup size
-  - C4 - 4oz
-  - C6 - 6oz
-  - C8 - 8oz
-  - Ca - 10oz
+  - 4 - 4oz
+  - 6 - 6oz
+  - 8 - 8oz
+  - a - 10oz
 
 ### Need more water
 
-00 03 0d 04 03 - need more water (ran out of water after the brew)
-00 03 0d 04 02 - need more water
+`00 03 0d 04 03` - need more water (ran out of water after the brew)
+
+`00 03 0d 04 02` - need more water (onscreen menu)
 
 ## Settings reporting
 
 ### Clock/wallpaper
 
-00 05 09 04 .. .. ..
+`00 05 09 04 .. .. ..`
+
 - bytes 4-6: DAHH HHHM MMMM MWWW W000
   - D - digital/analog clocks. 1 - digital
   - A - 12/24 clock display. 1 - 24, 0 - am/pm
@@ -75,11 +86,11 @@ RJ11 jack. Looking from the top of pins:
 
 ### reseroir light
 
-00 06 0b 04 .. .. .. ..
+`00 06 0b 04 .. .. .. ..`
 
-- bytes 4-7: LLF. hhhh  mmmm mm.O  .HHH HMMM  MMM. ....
+- bytes 4-7: LLo0 hhhh  mmmm mm0O  0HHH HMMM  MMM0 0000
   - LL - light color. 0-3
-  - F - night light off timer. 1 - enabled
+  - o - night light off timer. 1 - enabled
   - h - night light off hours. looks like only 0-11 are counted. bug?
   - m - night light off minutes
   - O - night light on timer. 1 - enabled
@@ -88,9 +99,9 @@ RJ11 jack. Looking from the top of pins:
 
 ### Water filter reminder
 
-00 03 0c 04 ..
+`00 03 0c 04 ..`
 
-- byte 4: R... ....
+- byte 4: R000 0000
   - R - water filter reminder. 1 - on
 
 
