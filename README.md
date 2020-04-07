@@ -74,7 +74,8 @@ Investigation:
 ### Brew started
 
 `03 04 .. ..`
-03 04 18 60
+
+need more investigation about "hot water": `03 04 18 60`
 
 - byte 2: ..SS ....
   - bits4-5 - brew size
@@ -92,8 +93,9 @@ Investigation:
 ### Brew ended
 
 `06 04 ..`
+
 Hot water:
-- byte 2: 40 or 43 - prolly amount of dispenced water
+- byte 2: 40 or 43 - prolly amount of dispenced water. Need more investigation.
 
 Program brew:
 - byte 2: 1100 XXXX
@@ -158,5 +160,4 @@ Pop-up reminder:
 
 - Auto on/off energy savings
 - High Altitude setting
-- Water Filter Reminder
 
