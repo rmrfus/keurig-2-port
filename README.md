@@ -99,6 +99,8 @@ last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
   - H - Hours 0-23
   - M - Minutes 0-59
   - W - Selected wallpaper. 0-15
+  
+BUG: clock set in 24hr mode to 12:xx results clock to be set at 00:xx. In 12hr mode everything is fine.
 
 ### reseroir light
 
