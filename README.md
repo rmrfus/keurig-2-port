@@ -37,6 +37,12 @@ Got various results.
 05 04 19 57 8e 7f 00 5d 01 b8 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f
 ^^       ^^    ^^                      ^^
 - +3 10oz strong            
+      ----- total number of cups?
+            ----- counter
+                  ----- counter
+                        ----- counter
+                              ----- counter
+                                    ----- number of cups strong?
 ```
 
 - first byte possibly indicates power-on (1) or periodic check-in (5). Also type-5 messages are 1 byte shorter.
