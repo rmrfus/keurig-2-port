@@ -1,0 +1,102 @@
+# Keurig 2.0 service port reverse engineering notes
+
+This is living document containing results of reverse engineering of Keurig 2.0 RJ11 service port.
+
+## Wiring
+
+RJ11 jack. Looking from the top of pins:
+- Black - always 3.3V
+- Red - always 3.3V 
+- Green - UART TX. 3.3V in normal state. 9600. 8N1
+- Yellow - Ground
+
+## Messages
+
+### Got power/boot
+
+00 03 08 04 18
+
+### Power on (screen button)
+
+00 1f 01 04 19 4c 8e 72 00 49 01 66 0a 86 0c b5 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+00 1f 01 04 19 53 8e 76 00 5c 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+               ^^    ^^    ^^    ^^          ^^
+00 1f 01 04 19 54 8e 76 00 5d 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+               ^^          ^^
+- number of brews. +1 4oz cocoa
+
+- not eeprom.
+- not internal clocks.
+
+
+### Power off (screen button)
+
+00 03 02 04 00
+
+### Brew started
+
+00 04 03 04 .. ..
+- byte 4: ..SS ....
+  - bits4-5 - brew size
+    - 00 - 4oz
+    - 01 - 6oz
+    - 10 - 8oz
+    - 11 - 10oz
+
+- byte 5: SC.. ....
+  - bit7 (S) - strong
+  - bit6 (C) - cocoa/other
+
+### Brew ended
+00 03 06 04 ..
+- byte 4: 1100 XXXX
+  - Last 4 bits has exact translation to cup size
+  - C4 - 4oz
+  - C6 - 6oz
+  - C8 - 8oz
+  - Ca - 10oz
+
+### Need more water
+
+00 03 0d 04 03 - need more water (ran out of water after the brew)
+00 03 0d 04 02 - need more water
+
+## Settings reporting
+
+### Clock/wallpaper
+
+00 05 09 04 .. .. ..
+- bytes 4-6: DAHH HHHM MMMM MWWW W000
+  - D - digital/analog clocks. 1 - digital
+  - A - 12/24 clock display. 1 - 24, 0 - am/pm
+  - H - Hours 0-23
+  - M - Minutes 0-59
+  - W - Selected wallpaper. 0-15
+
+### reseroir light
+
+00 06 0b 04 .. .. .. ..
+
+- bytes 4-7: LLF. hhhh  mmmm mm.O  .HHH HMMM  MMM. ....
+  - LL - light color. 0-3
+  - F - night light off timer. 1 - enabled
+  - h - night light off hours. looks like only 0-11 are counted. bug?
+  - m - night light off minutes
+  - O - night light on timer. 1 - enabled
+  - H - night light on hours. looks like only 0-11 are counted. bug?
+  - M - night light on minutes
+
+### Water filter reminder
+
+00 03 0c 04 ..
+
+- byte 4: R... ....
+  - R - water filter reminder. 1 - on
+
+
+### Settings without any reporting
+
+- Auto on/off energy savings
+- High Altitude setting
+- Water Filter Reminder
+
