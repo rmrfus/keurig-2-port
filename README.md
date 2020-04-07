@@ -62,7 +62,7 @@ Investigation:
 ```
 
 - first byte possibly indicates power-on (1) or periodic check-in (5). Also type-5 messages are 1 byte shorter.
-
+  - doesn't occur in 1 hour after power-on
 - not a serial. Last group of s/n should contain at least 3 bytes.
 - not a contents of settings
 - not internal clock.
