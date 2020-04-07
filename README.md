@@ -22,20 +22,20 @@ RJ11 jack. Looking from the top of pins:
 
 Reports after plugging in unit to power
 
-`00 03 08 04 18`
+`08 04 18`
 
 ### Power on (screen button)
 
 Got various results.
 ```
-00 1f 01 04 19 4c 8e 72 00 49 01 66 0a 86 0c b5 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
-00 1f 01 04 19 53 8e 76 00 5c 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
-               ^^    ^^    ^^    ^^    ^^    ^^
-00 1f 01 04 19 54 8e 76 00 5d 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+01 04 19 4c 8e 72 00 49 01 66 0a 86 0c b5 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+01 04 19 53 8e 76 00 5c 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
+         ^^    ^^    ^^    ^^    ^^    ^^
+01 04 19 54 8e 76 00 5d 01 b8 0a 87 0c b6 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f 00
                ^^          ^^
 - +1 4oz cocoa
-      05 04 19 57 8e 7f 00 5d 01 b8 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f
-      ^^       ^^.   ^^.                     ^^
+05 04 19 57 8e 7f 00 5d 01 b8 0a 87 0c b9 00 00 00 00 00 00 00 00 00 01 00 01 00 0a 01 4f
+^^       ^^    ^^                      ^^
 - +3 10oz strong            
 ```
 
@@ -47,28 +47,28 @@ Got various results.
 
 ### Power off (screen button)
 
-`00 03 02 04 00`
+`02 04 00`
 
 ### Brew started
 
-`00 04 03 04 .. ..`
+`03 04 .. ..`
 
-- byte 4: ..SS ....
+- byte 2: ..SS ....
   - bits4-5 - brew size
     - 00 - 4oz
     - 01 - 6oz
     - 10 - 8oz
     - 11 - 10oz
 
-- byte 5: SC.. ....
+- byte 3: SC.. ....
   - bit7 (S) - strong
   - bit6 (C) - cocoa/other
 
 ### Brew ended
 
-`00 03 06 04 ..`
+`06 04 ..`
 
-- byte 4: 1100 XXXX
+- byte 2: 1100 XXXX
   - Last 4 bits has exact translation to cup size
   - 4 - 4oz
   - 6 - 6oz
@@ -77,11 +77,11 @@ Got various results.
 
 ### Need more water
 
-`00 03 0d 04 03` 
+`0d 04 03` 
 
 or
 
-`00 03 0d 04 02` 
+`0d 04 02` 
 
 last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
 
@@ -89,9 +89,9 @@ last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
 
 ### Clock/wallpaper
 
-`00 05 09 04 .. .. ..`
+`09 04 .. .. ..`
 
-- bytes 4-6: DAHH HHHM MMMM MWWW W000
+- bytes 2-3: DAHH HHHM MMMM MWWW W000
   - D - digital/analog clocks. 1 - digital
   - A - 12/24 clock display. 1 - 24, 0 - am/pm
   - H - Hours 0-23
@@ -100,9 +100,9 @@ last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
 
 ### reseroir light
 
-`00 06 0b 04 .. .. .. ..`
+`0b 04 .. .. .. ..`
 
-- bytes 4-7: LLo0 hhhh  mmmm mm0O  0HHH HMMM  MMM0 0000
+- bytes 2-5: LLo0 hhhh  mmmm mm0O  0HHH HMMM  MMM0 0000
   - LL - light color. 0-3
   - o - night light off timer. 1 - enabled
   - h - night light off hours. looks like only 0-11 are counted. bug?
@@ -113,9 +113,9 @@ last bit might indicate if lid was opened after the message. 1 - no / 0 - yes.
 
 ### Water filter reminder
 
-`00 03 0c 04 ..`
+`0c 04 ..`
 
-- byte 4: R000 0000
+- byte 2: R000 0000
   - R - water filter reminder. 1 - on
 
 
