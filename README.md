@@ -6,7 +6,7 @@ This is living document containing results of reverse engineering of Keurig 2.0 
 
 ## Wiring
 
-RJ11 jack. Looking from the top of pins:
+RJ22 jack (not RJ11!). Looking from the top of pins:
 - Black - always 3.3V
 - Red - always 3.3V 
 - Green - UART TX. 3.3V in normal state. 9600. 8N1
@@ -20,7 +20,7 @@ RJ11 jack. Looking from the top of pins:
 
 ### Got power/boot
 
-Reports after plugging in unit to power
+Reports after plugging in unit to power / boot of the board.
 
 `08 04 18`
 
