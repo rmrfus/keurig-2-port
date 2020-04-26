@@ -1,8 +1,13 @@
 # Keurig 2.0 service port reverse engineering notes
 
-This is living document containing results of reverse engineering of Keurig 2.0 RJ11 service port.
+This is living document containing results of reverse engineering of Keurig 2.0 RJ22 service port.
 
 ![Image of the process](pics/IMG_0985.jpeg)
+
+
+## Service info
+
+While powered on, but not turned on and having only symbol of power button in bottom-right of the screen, hold this virtual button and press physical button for 3 times.
 
 ## Wiring
 
